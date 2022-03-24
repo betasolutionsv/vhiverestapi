@@ -27,8 +27,23 @@
 
 
 # api
+## login
+public function login() { 
 
+			$u_phn = $this->validateParameter('u_phn', $this->param['u_phn'], STRING);
+			$u_pwd = $this->validateParameter('u_pwd', $this->param['u_pwd'], STRING);
 
+			$user = new User;
+			$user->setUphn($u_phn);
+			$userexist = $user->checkUserExist();
+
+			if(!is_array($userexist)) {
+				$this->returnResponse(INVALID_USER_PASS, "Mobile Number is Not Exist.");
+			}else{
+				if(!password_verify($u_pwd,$userexist['u_pwd'])){
+					$this->returnResponse(INVALID_USER_PASS, "Mobile Number or Password is Incorrect.");
+				}
+			}
 
 public function getVisitorByHostID($hostID){
 
