@@ -71,7 +71,7 @@
 		}
 		
 		// GetVistiorDetails
-		public function getvistiordetails(){
+		public function getVistiorDetails(){
 			$v_id = $this->validateParameter('v_id', $this->param['v_id'], STRING,false);
 			$visitor = new vistor;
 			$visitor->setVid($v_id);
