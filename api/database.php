@@ -5,9 +5,9 @@
 	class Database {
 
 		private $server = 'localhost';
-		private $dbname = 'goffix';
-		private $user = 'root';
-		private $pass = 'G_@off!$ix2@19';
+		private $dbname = 'vhive';
+		private $user = 'kare';
+		private $pass = 'Kare@123';
 
 		public function connect() {
 			try {
