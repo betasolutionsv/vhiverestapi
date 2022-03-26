@@ -30,7 +30,7 @@
 			$this->redis = $redisConnect->connect();
 
 
-			$this->services = array("login","register","uniquemobilenumbervalidation","uniqueemailvalidation","adduserconfig","addprofileimage","deleteprofileimage","categorynamesbykeyword","getmastersdataofaddpostform","otpcheck","directlogin","forgotpassword","resetpassword","resendotp","getlocationid");
+			$this->services = array("login","register","uniquemobilenumbervalidation","uniqueemailvalidation","adduserconfig","addprofileimage","deleteprofileimage","categorynamesbykeyword","getmastersdataofaddpostform","otpcheck","directlogin","forgotpassword","resetpassword","resendotp","getlocationid","vlogin");
 
 			if (!in_array(strtolower($this->serviceName), $this->services))
 			{
@@ -125,7 +125,7 @@
 					$token = $this->getBearerToken();
 					$payload = JWT::decode($token, SECRETE_KEY, ['HS256']);
 
-					$stmt = $this->dbConnect->prepare("SELECT * FROM usr_s1 WHERE u_id = :userId");
+					$stmt = $this->dbConnect->prepare("SELECT * FROM `vsitor` WHERE v_id = :userId");
 					$stmt->bindParam(":userId", $payload->userId);
 					$stmt->execute();
 					$user = $stmt->fetch(PDO::FETCH_ASSOC);
