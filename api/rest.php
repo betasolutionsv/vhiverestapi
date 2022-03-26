@@ -10,6 +10,7 @@
 		protected $dbConnect;
 		protected $redis;
 		protected $userId;
+		// protected $v_id;
 		protected $services;
 		protected $content_types;
 

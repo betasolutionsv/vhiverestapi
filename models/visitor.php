@@ -8,6 +8,7 @@ class vistor{
     private $v_pwd;
     private $v_nm;
     private $v_em;
+	private $v_id;
 
     function setVid($v_id) { $this->v_id = $v_id; }
 		function getVid() { return $this->v_id; }
@@ -25,10 +26,20 @@ class vistor{
 			$this->dbConnect = $db->connect();
 		}
 
+		//Login Model
         public function checkVisitorExist(){
 
 			$stmt = $this->dbConnect->prepare("SELECT v_id,v_nm,v_phn,v_em,v_pwd FROM `vsitor` WHERE v_phn=:v_phn");
 			$stmt->bindParam(":v_phn",$this->v_phn);
+			$stmt->execute();
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $data;
+		}
+
+		// GetVistiorDetails
+		public function getvistiordetails(){
+			$stmt = $this->dbConnect->prepare("SELECT v_id,v_nm,v_phn,v_em FROM `vsitor` WHERE v_id=:v_id");
+			$stmt->bindParam(":v_id",$this->v_id);
 			$stmt->execute();
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 			return $data;

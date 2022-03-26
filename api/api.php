@@ -44,7 +44,7 @@
 					'iat' => time(),
 					'iss' => 'localhost',
 					'exp' => time() + (24*3600),
-					'v_id' => $visitorExists['v_id']
+					'userId' => $visitorExists['v_id']
 				];
 
 				// Json Web Token Creation
@@ -57,7 +57,7 @@
 				// Delete this token form redis based on expiry time
 				$this->redis->expire($token,$paylod['exp']);
 
-				$data['v_id'] = $paylod['v_id'];
+				$data['v_id'] = $paylod['userId'];
 				$data['v_phn']=$visitorExists['v_phn'];
 				$data['v_em']=$visitorExists['v_em'];
 				$data['v_nm'] = $visitorExists['v_nm'];
@@ -70,6 +70,22 @@
 			}
 		}
 		
+		// GetVistiorDetails
+		public function getvistiordetails(){
+			$v_id = $this->validateParameter('v_id', $this->param['v_id'], STRING,false);
+			$visitor = new vistor;
+			$visitor->setVid($v_id);
+
+			$data = $visitor->getvistiordetails();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+
+		}
 
 
 	}
