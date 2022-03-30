@@ -3,12 +3,12 @@ restapi
 
 Demo Live API link
 
-http://api.goffix.com/api/
+http://localhost/vhive/api/vhiverestapi/api/
 POST
 {
-    "service_name": "login",
+    "service_name": "vlogin",
     "param": {
-        "u_phn": "9515103611",
-        "u_pwd": "Ahen$14794"
+        "v_phn": "100",
+        "v_pwd": "admin"
     }
 }
