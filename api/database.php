@@ -5,7 +5,7 @@
 	class Database {
 
 		private $server = 'localhost';
-		private $dbname = 'vhive';
+		private $dbname = 'vhive_v1';
 		private $user = 'kare';
 		private $pass = 'Kare@123';
 

@@ -61,6 +61,7 @@
 				$data['v_phn']=$visitorExists['v_phn'];
 				$data['v_em']=$visitorExists['v_em'];
 				$data['v_nm'] = $visitorExists['v_nm'];
+				$data['v_rvid'] = $visitorExists['v_rvid'];
 				$data['token'] =  $token;
 
 				$this->returnResponse(SUCCESS_RESPONSE, $data);
@@ -87,6 +88,123 @@
 
 		}
 
+		//Get Departments
+		public function getDepartments(){
+			$department = new vistor;
+			$data = $department->getDepartments();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
+
+		//Get Location 
+		public function getLocation(){
+			$location = new vistor;
+			$data = $location->getLocation();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
+
+		//Get Relation
+		public function getRelation(){
+			$relation = new vistor;
+			$data = $relation->getRelation();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
+
+		//Get Host names from DB
+		public function getHostNames(){
+			$hostName = new vistor;
+			$data = $hostName->getHostNames();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
+
+		// book visit 
+		public function bookVisit(){
+			$vl_dep  = $this->validateParameter('vl_dep', $this->param['vl_dep'], INTEGER);
+			$vl_hnm = $this->validateParameter('vl_hnm', $this->param['vl_hnm'], INTEGER);
+			$vl_pov = $this->validateParameter('vl_pov', $this->param['vl_pov'], STRING);
+			$vl_st = $this->validateParameter('vl_st', $this->param['vl_st'], STRING);
+			$vl_vid = $this->validateParameter('vl_vid', $this->param['vl_vid'], INTEGER);
+
+			$visitor = new vistor;
+			$visitor->setVl_dep($vl_dep);
+			$visitor->setVl_hnm($vl_hnm);
+			$visitor->setVl_pov($vl_pov);
+			$visitor->setVl_st($vl_st);
+			$visitor->setVid($vl_vid);
+
+			$data = $visitor->InsbookVisit();
+
+			// if(is_array($data) && count($data)>0){
+			// 	$response['data'] = $data;
+			// 	$this->returnResponse(SUCCESS_RESPONSE, $response);	
+			// }else{
+			// 	$this->returnResponse(FAILURE_RESPONSE, "No data Inserted");
+			// }
+			if(!$data) {
+				$this->returnResponse(FAILURE_RESPONSE, "Unable to register the User Details. Please try again");
+			} else {
+					$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);	
+			}
+
+
+
+		}
+
+		// Get Booked Visits
+		public function getBookedVisits(){
+			$vid = $this->validateParameter('vid', $this->param['vid'], INTEGER);
+			$visitor = new vistor;
+			$visitor->setVid($vid);
+
+			$data = $visitor->getVisitorLogs();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
+
+		// Get Booked Visits
+		public function getVisitorId(){
+			$vlid = $this->validateParameter('vlid', $this->param['vlid'], INTEGER);
+			$visitor = new vistor;
+			$visitor->setVl_id($vlid);
+
+			$data = $visitor->getVisitorVisitDetails();
+
+			if(is_array($data) && count($data)>0){
+				$response['data'] = $data;
+				$this->returnResponse(SUCCESS_RESPONSE, $response);
+			}else{
+				$this->returnResponse(FAILURE_RESPONSE, "No data found");
+			}
+		}
 
 	}
 
