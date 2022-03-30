@@ -132,7 +132,7 @@ class vistor{
 
 		//Get Visitor Logs
 		public function getVisitorLogs(){
-			$stmt = $this->dbConnect->prepare("SELECT * FROM `visitor_log` INNER JOIN admin ON admin.a_id = vl_hnm WHERE vl_vid = :v_id");
+			$stmt = $this->dbConnect->prepare("SELECT * FROM `visitor_log` INNER JOIN admin ON admin.a_id = vl_hnm WHERE vl_vid = :v_id ORDER BY `visitor_log`.`vl_id` DESC ");
 			$stmt->bindParam(":v_id",$this->v_id);
 			$stmt->execute();
 			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -141,7 +141,7 @@ class vistor{
 
 		//Get Visitor Detailed visit data
 		public function getVisitorVisitDetails(){
-			$stmt = $this->dbConnect->prepare("SELECT * FROM `visitor_log` INNER JOIN admin ON admin.a_id = vl_hnm INNER JOIN vsitor ON vsitor.v_id = visitor_log.vl_vid WHERE vl_id = :vl_id");
+			$stmt = $this->dbConnect->prepare("SELECT * FROM `visitor_log` INNER JOIN admin ON admin.a_id = vl_hnm INNER JOIN vsitor ON vsitor.v_id = visitor_log.vl_vid WHERE vl_id = :vl_id ORDER BY `visitor_log`.`vl_id` DESC ");
 			$stmt->bindParam(":vl_id",$this->vl_id);
 			$stmt->execute();
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
