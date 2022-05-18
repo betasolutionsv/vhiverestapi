@@ -31,7 +31,7 @@
 			$this->redis = $redisConnect->connect();
 
 
-			$this->services = array("login","register","uniquemobilenumbervalidation","uniqueemailvalidation","adduserconfig","addprofileimage","deleteprofileimage","categorynamesbykeyword","getmastersdataofaddpostform","otpcheck","directlogin","forgotpassword","resetpassword","resendotp","getlocationid","vlogin");
+			$this->services = array("hlogin","getlocationid","vlogin","gethostvisitlog","getvisitoridh","changestat","addvistorp","addvistorg","dep","insertadmin","uploadimage","hchangepassword","vcreatepassword");
 
 			if (!in_array(strtolower($this->serviceName), $this->services))
 			{
